@@ -37,10 +37,9 @@ class Game:
             if self.winLineCheck(pos, 1):
                 return self.board[pos]
 
-    # def diagCheck(self):
-    #     for pos in [0,3,6]:
-    #         if self.winLineCheck(pos, 1):
-    #             return self.board[pos]
+    def diagCheck(self):
+        return self.winLineCheck(0, 4) or self.winLineCheck(2, 2)
+
     def calc_winner(self):
         if self.turn < 5:
             return
