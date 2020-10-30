@@ -17,7 +17,7 @@ class Game:
                 ret.append(self.board[x] + "|")
             else:
                 ret.append(self.board[x] + "\n")
-        return ret
+        return "".join(ret)
 
     def move(self, x, y, player):
         if self.board[x + 3 * y] != " ":
