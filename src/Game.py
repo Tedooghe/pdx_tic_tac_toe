@@ -46,7 +46,8 @@ class Game:
         return self.horiCheck() or self.vertCheck()
 
 
-g = Game("a", "b")
-print(g.move(1, 1, "a"), g.move(0, 1, "a"), g.move(2, 1, "a"))
-print(g.move(0, 0, "b"), g.move(1, 0, "b"), g.move(2, 0, "b"))
-print(g)
+def testy():
+    g = Game("a", "b")
+    print(g.move(1, 1, "a"), g.move(0, 1, "a"), g.move(2, 1, "a"))
+    print(g.move(0, 0, "b"), g.move(1, 0, "b"), g.move(2, 0, "b"))
+    print(g)
