@@ -2,10 +2,8 @@ class Player:
     def __init__(self,name,token):
         self.name = name
         self.token = token # X or O
+    
 
-human = input('to play, enter your name here: ')
-    player1 = Player(human, 'X')
-    player2 = Player('Hal', 'O')
 #assigns the user x and computer o
 
 class Board:
@@ -35,5 +33,6 @@ class Board:
     def is_game_over():
 #returns true if board is full or a player has won
 
-
-
+human = input('to play, enter your name here: ')
+player1 = Player(human, 'X')
+player2 = Player('Hal', 'O')
