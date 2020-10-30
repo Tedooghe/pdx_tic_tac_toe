@@ -5,12 +5,19 @@ class Game:
         self.turn = 0
 
     def __repr__(self):
-        return "".join(
-            [
-                self.board[x] + "|" if x % 3 < 2 else self.board[x] + "\n"
-                for x in range(9)
-            ]
-        )
+        # return "".join(
+        #     [
+        #         self.board[x] + "|" if x % 3 < 2 else self.board[x] + "\n"
+        #         for x in range(9)
+        #     ]
+        # )
+        ret = []
+        for x in range(9):
+            if x % 3 < 2:
+                ret.append(self.board[x] + "|")
+            else:
+                ret.append(self.board[x] + "\n")
+        return ret
 
     def move(self, x, y, player):
         if self.board[x + 3 * y] != " ":
