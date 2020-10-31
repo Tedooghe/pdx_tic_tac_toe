@@ -5,13 +5,13 @@ class Game:
         self.turn = 0
 
     def __repr__(self):
-        # return "\n" + "".join(
+        # return "".join(
         #     [
         #         self.board[x] + "|" if x % 3 < 2 else self.board[x] + "\n"
         #         for x in range(9)
         #     ]
         # )
-        ret = ["\n"]
+        ret = []
         for x in range(9):
             if x % 3 < 2:
                 ret.append(self.board[x] + "|")
@@ -25,8 +25,7 @@ class Game:
             return
         self.board[x + 3 * y] = player
         self.turn += 1
-        # return self.calc_winner()
-        return self.__repr__()
+        return self.calc_winner()
 
     def winLineCheck(self, pos, n):
         if (
@@ -42,7 +41,7 @@ class Game:
 
     def vertCheck(self):
         for pos in range(3):
-            if self.winLineCheck(pos, 3):
+            if self.winLineCheck(pos, 1):
                 return self.board[pos]
 
     def diagCheck(self):
@@ -51,24 +50,11 @@ class Game:
     def calc_winner(self):
         if self.turn < 5:
             return
-        return self.horiCheck() or self.vertCheck() or self.diagCheck()
-
-    def is_full(self):
-        return self.turn > 8
-
-    def is_game_over(self):
-        return self.calc_winner() or self.board.count(" ") == 0
+        return self.horiCheck() or self.vertCheck()
 
 
 def testy():
     g = Game("a", "b")
-    print(g.move(1, 1, "b"), g.move(0, 1, "a"), g.move(2, 1, "a"))
-    print(g.is_game_over())
-    print(g.move(0, 0, "b"), g.move(1, 0, "b"), g.move(2, 0, "a"))
-    print("full ", g.is_full(), "winner ", g.calc_winner(), "over ", g.is_game_over())
-    print(g.move(2, 2, "b"), g.move(0, 2, "a"), g.move(1, 2, "c"))
-    print("full ", g.is_full(), "winner ", g.calc_winner(), "over ", g.is_game_over())
+    print(g.move(1, 1, "a"), g.move(0, 1, "a"), g.move(2, 1, "a"))
+    print(g.move(0, 0, "b"), g.move(1, 0, "b"), g.move(2, 0, "b"))
     print(g)
-
-
-testy()
