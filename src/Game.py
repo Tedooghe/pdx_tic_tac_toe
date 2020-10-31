@@ -22,7 +22,7 @@ class Game:
     def move(self, x: int, y: int, player):
         # convert flat array to 2d 3x3
         pos = x + 3 * y
-        if pos > range(self.board):
+        if pos > len(self.board):
             print(" out of range ")
             return None
         # check if place on board is taken
@@ -34,25 +34,25 @@ class Game:
         # return self.calc_winner()
         return self.__repr__()
 
-    def winLineCheck(self, pos: int, n: int):
-        # traverse board from pos by n-size steps
+    def winLineCheck(self, i: int, n: int):
+        # traverse board from index by n-size steps
         if (
-            self.board[pos] == self.board[pos + n]
-            and self.board[pos + n] == self.board[pos + 2 * n]
+            self.board[i] == self.board[i + n]
+            and self.board[i + n] == self.board[i + 2 * n]
         ):
-            return self.board[pos]
+            return self.board[i]
 
     def horiCheck(self):
         # check for horizontal wins
-        for pos in [0, 3, 6]:
-            if self.winLineCheck(pos, 1):
-                return self.board[pos]
+        for i in [0, 3, 6]:
+            if self.winLineCheck(i, 1):
+                return self.board[i]
 
     def vertCheck(self):
         # check for vertical wins
-        for pos in range(3):
-            if self.winLineCheck(pos, 3):
-                return self.board[pos]
+        for i in range(3):
+            if self.winLineCheck(i, 3):
+                return self.board[i]
 
     # check for diagonal wins
     # from top left and top right
@@ -71,7 +71,7 @@ class Game:
 
     # check winner or no spaces left
     def is_game_over(self):
-        return self.calc_winner() or self.board.count(" ") == 0
+        return self.calc_winner() or self.is_full()
 
 
 def testy():
@@ -85,4 +85,4 @@ def testy():
     print(g)
 
 
-# testy()
+testy()
