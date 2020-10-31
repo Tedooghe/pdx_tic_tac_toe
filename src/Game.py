@@ -19,16 +19,23 @@ class Game:
                 ret.append(self.board[x] + "\n")
         return "".join(ret)
 
-    def move(self, x, y, player):
-        if self.board[x + 3 * y] != " ":
+    def move(self, x: int, y: int, player):
+        # convert flat array to 2d 3x3
+        pos = x + 3 * y
+        if pos > range(self.board):
+            print(" out of range ")
+            return None
+        # check if place on board is taken
+        if self.board[pos] != " ":
             print(" seats taken ")
-            return
-        self.board[x + 3 * y] = player
+            return None
+        self.board[pos] = player
         self.turn += 1
         # return self.calc_winner()
         return self.__repr__()
 
-    def winLineCheck(self, pos, n):
+    def winLineCheck(self, pos: int, n: int):
+        # traverse board from pos by n-size steps
         if (
             self.board[pos] == self.board[pos + n]
             and self.board[pos + n] == self.board[pos + 2 * n]
@@ -36,18 +43,24 @@ class Game:
             return self.board[pos]
 
     def horiCheck(self):
+        # check for horizontal wins
         for pos in [0, 3, 6]:
             if self.winLineCheck(pos, 1):
                 return self.board[pos]
 
     def vertCheck(self):
+        # check for vertical wins
         for pos in range(3):
             if self.winLineCheck(pos, 3):
                 return self.board[pos]
 
+    # check for diagonal wins
+    # from top left and top right
     def diagCheck(self):
         return self.winLineCheck(0, 4) or self.winLineCheck(2, 2)
 
+    # check if minimum to win turns have been taken
+    # return winner or None
     def calc_winner(self):
         if self.turn < 5:
             return
@@ -56,6 +69,7 @@ class Game:
     def is_full(self):
         return self.turn > 8
 
+    # check winner or no spaces left
     def is_game_over(self):
         return self.calc_winner() or self.board.count(" ") == 0
 
