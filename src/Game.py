@@ -23,7 +23,7 @@ class Game:
         # convert flat array to 2d 3x3
         pos = x + 3 * y
         if pos > len(self.board):
-            print(" out of range ")
+            print(" move out of range ")
             return None
         # check if place on board is taken
         if self.board[pos] != " ":
@@ -85,4 +85,4 @@ def testy():
     print(g)
 
 
-testy()
+# testy()
